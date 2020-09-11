@@ -12,3 +12,5 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql mbstring tokenizer exi
 gettext gmp iconv opcache pdo_sqlite phar posix session simplexml soap sockets xmlrpc xmlwriter zip
 
 RUN apk add composer
+
+ENTRYPOINT php-fpm
