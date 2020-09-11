@@ -13,5 +13,5 @@ gettext gmp iconv opcache pdo_sqlite phar posix session simplexml soap sockets x
 
 RUN apk add composer
 
-#RUN apk del postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
-#libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev libzip-dev
+RUN apk del postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
+libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev libzip-dev
