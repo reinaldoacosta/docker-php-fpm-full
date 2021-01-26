@@ -30,8 +30,6 @@ Why was this build/repository created? Because the default PHP-FPM build does no
 * xmlrpc
 * xmlwriter
 * zip
-<<<<<<< HEAD
-=======
 
 ### Downloable PHP versions
 * PHP 7.2 `docker pull detallado/php-fpm-lightweight:7.2`
@@ -42,4 +40,3 @@ Why was this build/repository created? Because the default PHP-FPM build does no
 
 ### How to use
 Check the [docker-compose-sample.yml](/docker-compose-sample.yml) to view an example about using it.
->>>>>>> 5f53ee2ed8761da22ffefbc59a46a35346267fb3
