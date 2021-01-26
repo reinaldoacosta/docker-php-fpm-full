@@ -36,36 +36,36 @@ RUN docker-php-ext-install pcntl
 RUN docker-php-ext-install pdo
 RUN apk add freetds-dev
 RUN docker-php-ext-install pdo_dblib
-RUN docker-php-ext-install pdo_firebird
 RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install pdo_oci
-RUN docker-php-ext-install pdo_odbc
 RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install pgsql
 RUN docker-php-ext-install phar
 RUN docker-php-ext-install posix
+RUN apk add aspell-dev
 RUN docker-php-ext-install pspell
 RUN docker-php-ext-install readline
-RUN docker-php-ext-install reflection
 RUN docker-php-ext-install session
 RUN docker-php-ext-install shmop
 RUN docker-php-ext-install simplexml
+RUN apk add net-snmp-dev
 RUN docker-php-ext-install snmp
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install sockets
+RUN apk add libsodium-dev
 RUN docker-php-ext-install sodium
-RUN docker-php-ext-install spl
-RUN docker-php-ext-install standard
+RUN apk add argon2-dev
 RUN docker-php-ext-install sysvmsg
 RUN docker-php-ext-install sysvsem
 RUN docker-php-ext-install sysvshm
+RUN apk add tidyhtml-dev
 RUN docker-php-ext-install tidy
 RUN docker-php-ext-install tokenizer
 RUN docker-php-ext-install xml
-RUN docker-php-ext-install xmlreader
+#RUN docker-php-ext-install xmlreader
 RUN docker-php-ext-install xmlrpc
-RUN docker-php-ext-install xmlwriter
+#RUN docker-php-ext-install xmlwriter
+RUN apk add libxslt-dev
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zend_test
 RUN docker-php-ext-install zip
