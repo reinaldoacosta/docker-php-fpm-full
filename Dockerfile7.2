@@ -32,6 +32,7 @@ RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install pcntl
 RUN docker-php-ext-install pdo
+RUN apk add freetds-dev
 RUN docker-php-ext-install pdo_dblib
 RUN docker-php-ext-install pdo_firebird
 RUN docker-php-ext-install pdo_mysql
