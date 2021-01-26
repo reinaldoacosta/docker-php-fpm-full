@@ -4,7 +4,9 @@ RUN apk update
 
 #install required dependencies
 RUN apk add postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
-libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev libzip-dev enchant2-dev ldb-dev libldap openldap-dev
+    libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev \
+    libzip-dev enchant2-dev ldb-dev libldap openldap-dev \
+    freetds-dev
 
 
 #install and compile php extensions
