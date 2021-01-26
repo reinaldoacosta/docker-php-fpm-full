@@ -34,7 +34,9 @@ RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xmlwriter
 RUN docker-php-ext-install zip
 
-ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/extensions-installer
+RUN chmod +x /usr/local/bin/extensions-installer
+
 
 RUN apk add composer
 
