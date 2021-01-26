@@ -34,9 +34,7 @@ RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xmlwriter
 RUN docker-php-ext-install zip
 
-RUN pecl install -o -f redis
-RUN rm -rf /tmp/pear
-RUN docker-php-ext-enable redis
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 RUN apk add composer
 
