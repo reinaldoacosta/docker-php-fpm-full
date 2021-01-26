@@ -6,7 +6,7 @@ RUN apk update
 RUN apk add postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
     libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev \
     libzip-dev ldb-dev libldap openldap-dev recode-dev \
-    freetds-dev libxslt-dev aspell-dev net-snmp-dev tidyhtml-dev libsodium-dev argon2-dev
+    freetds-dev libxslt-dev aspell-dev net-snmp-dev tidyhtml-dev argon2-dev
 
 
 #install and compile php extensions
@@ -49,7 +49,6 @@ RUN docker-php-ext-install simplexml
 RUN docker-php-ext-install snmp
 RUN docker-php-ext-install soap
 RUN docker-php-ext-install sockets
-RUN docker-php-ext-install sodium
 RUN docker-php-ext-install sysvmsg
 RUN docker-php-ext-install sysvsem
 RUN docker-php-ext-install sysvshm
