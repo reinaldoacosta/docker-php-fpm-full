@@ -58,7 +58,6 @@ RUN docker-php-ext-install recode
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xsl
-RUN docker-php-ext-install zend_test
 RUN docker-php-ext-install zip
 
 RUN apk add composer
