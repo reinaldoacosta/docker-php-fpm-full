@@ -8,8 +8,32 @@ libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev libzip-dev
 
 
 #install and compile php extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql mbstring tokenizer exif fileinfo filter readline gd intl \
-gettext gmp iconv opcache pdo_sqlite phar posix session simplexml soap sockets xmlrpc xmlwriter zip
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install pdo
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_pgsql
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install tokenizer
+RUN docker-php-ext-install exif
+RUN docker-php-ext-install fileinfo
+RUN docker-php-ext-install filter
+RUN docker-php-ext-install readline
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install gettext
+RUN docker-php-ext-install gmp
+RUN docker-php-ext-install iconv
+RUN docker-php-ext-install opcache
+RUN docker-php-ext-install pdo_sqlite
+RUN docker-php-ext-install phar
+RUN docker-php-ext-install posix
+RUN docker-php-ext-install session
+RUN docker-php-ext-install simplexml
+RUN docker-php-ext-install soap
+RUN docker-php-ext-install sockets
+RUN docker-php-ext-install xmlrpc
+RUN docker-php-ext-install xmlwriter
+RUN docker-php-ext-install zip
 
 RUN apk add composer
 
