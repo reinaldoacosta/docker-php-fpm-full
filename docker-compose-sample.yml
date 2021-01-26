@@ -1,0 +1,31 @@
+version: '3.7'
+
+networks:
+  phpApp:
+    name: phpApp
+
+services:
+  nginx_webserver:
+    container_name: nginx_webserver
+    image: nginx:1.19.2
+    ports:
+      - 80:80
+    networks:
+      - phpApp
+    volumes:
+      - ./yourPath:/app
+    depends_on:
+      - php_fpm_full
+    working_dir: /app
+    depends_on:
+      - market_db
+
+  php_fpm_full:
+    container_name: php_fpm_full
+    image: detallado/php-fpm-lightweight
+    networks:
+      - phpApp
+    working_dir: /app
+    entrypoint: sh -c "php-fpm"
+    volumes:
+      - ./yourPath:/app
