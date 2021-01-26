@@ -16,7 +16,6 @@ RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install tokenizer
 RUN docker-php-ext-install exif
 RUN docker-php-ext-install fileinfo
-RUN docker-php-ext-install filter
 RUN docker-php-ext-install readline
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install intl
@@ -34,6 +33,10 @@ RUN docker-php-ext-install sockets
 RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xmlwriter
 RUN docker-php-ext-install zip
+
+RUN pecl install -o -f redis \
+&&  rm -rf /tmp/pear \
+&&  docker-php-ext-enable redis
 
 RUN apk add composer
 
