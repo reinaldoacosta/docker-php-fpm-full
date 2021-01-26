@@ -5,7 +5,7 @@ RUN apk update
 #install required dependencies
 RUN apk add postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
     libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev \
-    libzip-dev enchant2-dev ldb-dev libldap openldap-dev \
+    libzip-dev enchant2-dev ldb-dev libldap openldap-dev recode-dev \
     freetds-dev libxslt-dev aspell-dev net-snmp-dev tidyhtml-dev libsodium-dev argon2-dev
 
 
@@ -55,6 +55,7 @@ RUN docker-php-ext-install sysvsem
 RUN docker-php-ext-install sysvshm
 RUN docker-php-ext-install tidy
 RUN docker-php-ext-install tokenizer
+RUN docker-php-ext-install recode
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xsl
