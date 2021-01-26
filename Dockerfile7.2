@@ -29,8 +29,6 @@ RUN docker-php-ext-install json
 RUN docker-php-ext-install ldap
 RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install mysqli
-RUN apk add unixodbc-dev
-RUN docker-php-ext-install odbc
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install pcntl
 RUN docker-php-ext-install pdo
