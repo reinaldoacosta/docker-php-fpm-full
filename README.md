@@ -19,8 +19,6 @@ If you need any of these extensions, please open an issue and I will try to add 
 docker run -d --name my-running-app -v /path/to/app:/var/www/html -p 9000:9000 php-fpm-full
 ```
 
-Missing: #FALTA oci8, odbc, pdo_oci, snmp
-
 ### Downloable PHP versions
 * PHP 7.0 `docker pull detallado/php-fpm-full:7.0`
 * PHP 7.1 `docker pull detallado/php-fpm-full:7.1`
