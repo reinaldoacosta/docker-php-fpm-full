@@ -1,16 +1,96 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.2-fpm
 
-RUN apk update
+RUN apt update
 
-#install required dependencies
-RUN apk add postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
-libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev libzip-dev
+RUN apt install -y libpq-dev
+RUN apt install -y libonig-dev
+RUN apt install -y libedit-dev
+RUN apt install -y libzip-dev
+RUN apt install -y libpng-dev
+RUN apt install -y libicu-dev
+RUN apt install -y libgmp-dev
+RUN apt install -y libsqlite3-dev
+RUN apt install -y libssl-dev
+RUN apt install -y libxml2-dev
+RUN apt install -y libcurl4-openssl-dev
+RUN apt install -y libxslt-dev
+RUN apt install -y libffi-dev
+RUN apt install -y freetds-dev
+RUN apt install -y libbz2-dev
+RUN apt install -y libpspell-dev
+RUN apt install -y libldap2-dev
+RUN apt install -y libc-client-dev
+RUN apt install -y libkrb5-dev
+RUN apt install -y libldap2-dev
+RUN apt install -y libmcrypt-dev
+RUN apt install -y librecode-dev
+RUN apt install -y libtidy-dev
+RUN apt install -y firebird-dev
+RUN apt install -y unixodbc-dev unixodbc
+RUN apt install -y libsnmp-dev
+RUN apt-get install -y libmagickwand-dev --no-install-recommends
+
+RUN ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/
+RUN ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/
+
+RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install bz2
+RUN docker-php-ext-install calendar
+RUN docker-php-ext-install ctype
+RUN docker-php-ext-install curl
+RUN docker-php-ext-install dba
+RUN docker-php-ext-install dom
+RUN docker-php-ext-install exif
+RUN docker-php-ext-install ffi
+RUN docker-php-ext-install fileinfo
+RUN docker-php-ext-install ftp
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install gettext
+RUN docker-php-ext-install gmp
+RUN docker-php-ext-install iconv
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
+RUN docker-php-ext-install imap
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install ldap
+RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install opcache
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install pdo
+RUN docker-php-ext-install pdo_dblib
+RUN docker-php-ext-install pdo_firebird
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr
+RUN docker-php-ext-install pdo_odbc
+RUN docker-php-ext-install pdo_pgsql
+RUN docker-php-ext-install pdo_sqlite
+RUN docker-php-ext-install pgsql
+RUN docker-php-ext-install phar
+RUN docker-php-ext-install posix
+RUN docker-php-ext-install pspell
+RUN docker-php-ext-install session
+RUN docker-php-ext-install shmop
+RUN docker-php-ext-install simplexml
+RUN docker-php-ext-install soap
+RUN docker-php-ext-install sockets
+RUN docker-php-ext-install sysvmsg
+RUN docker-php-ext-install sysvsem
+RUN docker-php-ext-install sysvshm
+RUN docker-php-ext-install tidy
+RUN docker-php-ext-install xml
+RUN export CFLAGS="-I/usr/src/php" && docker-php-ext-install xmlreader
+RUN docker-php-ext-install xmlwriter
+RUN docker-php-ext-install xsl
+RUN docker-php-ext-install zip
+
+#install redis extension
+RUN pecl install redis
+RUN docker-php-ext-enable redis
 
 
-#install and compile php extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql mbstring tokenizer exif fileinfo filter readline gd intl \
-gettext gmp iconv opcache pdo_sqlite phar posix session simplexml soap sockets xmlrpc xmlwriter zip
+RUN pecl install imagick
+RUN docker-php-ext-enable imagick
 
-RUN apk add composer
-
+RUN echo "INSTALLING COMPOSER"
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /usr/local/bin/composer
 ENTRYPOINT php-fpm
