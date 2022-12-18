@@ -1,8 +1,5 @@
 FROM php:8.0-fpm
-
 RUN apt update
-
-
 RUN apt install -y libpq-dev
 RUN apt install -y libonig-dev
 RUN apt install -y libedit-dev
@@ -30,10 +27,8 @@ RUN apt install -y firebird-dev
 RUN apt install -y unixodbc-dev unixodbc
 RUN apt install -y libsnmp-dev
 RUN apt-get install -y libmagickwand-dev --no-install-recommends
-
 RUN ln -s /usr/lib/x86_64-linux-gnu/libsybdb.so /usr/lib/
 RUN ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/
-
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install bz2
 RUN docker-php-ext-install calendar
@@ -82,24 +77,15 @@ RUN export CFLAGS="-I/usr/src/php" && docker-php-ext-install xmlreader
 RUN docker-php-ext-install xmlwriter
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
-
-#install redis extension
 RUN pecl install redis
 RUN docker-php-ext-enable redis
-
 RUN pecl install mcrypt-1.0.5
-
 RUN pecl install imagick
 RUN docker-php-ext-enable imagick
-
 RUN apt install -y libffi-dev && docker-php-ext-install ffi
-
-#install libsodium extension and its dependencies
 RUN apt-get install -y libsodium-dev
 RUN pecl install libsodium
 RUN docker-php-ext-enable sodium
-
-RUN echo "INSTALLING COMPOSER"
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /usr/local/bin/composer
 ENTRYPOINT php-fpm

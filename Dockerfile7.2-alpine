@@ -1,16 +1,9 @@
 FROM php:7.2-fpm-alpine
-
 RUN apk update
-
-#install required dependencies
 RUN apk add postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
     libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev \
     libzip-dev enchant2-dev ldb-dev libldap openldap-dev \
     freetds-dev libxslt-dev aspell-dev net-snmp-dev tidyhtml-dev libsodium-dev argon2-dev
-
-
-#install and compile php extensions
-
 RUN docker-php-ext-install bcmath
 RUN docker-php-ext-install bz2
 RUN docker-php-ext-install calendar
@@ -58,24 +51,16 @@ RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zend_test
 RUN docker-php-ext-install zip
-
-#install redis extension
 RUN pecl bundle -d /usr/src/php/ext redis \
 && rm /usr/src/php/ext/redis-*.tgz \
 && docker-php-ext-install redis
-
-#install imagick extension
 RUN apk add --no-cache --virtual .imagick-deps imagemagick-dev
 RUN pecl bundle -d /usr/src/php/ext imagick
 RUN rm /usr/src/php/ext/imagick-*.tgz
 RUN docker-php-ext-install imagick
 RUN apk del .imagick-deps
-
-#install libsodium extension
 RUN pecl bundle -d /usr/src/php/ext libsodium \
 && rm /usr/src/php/ext/libsodium-*.tgz \
 && docker-php-ext-install libsodium
-
 RUN apk add composer
-
 ENTRYPOINT php-fpm
