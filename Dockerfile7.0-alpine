@@ -45,29 +45,26 @@ RUN docker-php-ext-install sockets
 RUN docker-php-ext-install sysvmsg
 RUN docker-php-ext-install sysvsem
 RUN docker-php-ext-install sysvshm
-RUN docker-php-ext-install tidy
+RUN apk add --no-cache tidyhtml-dev \
+  && ln -s /usr/include/tidybuffio.h /usr/include/buffio.h \
+  && docker-php-ext-install tidy
 RUN docker-php-ext-install tokenizer
 RUN docker-php-ext-install recode
 RUN docker-php-ext-install xml
 RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
-RUN apk add --no-cache --virtual .mcrypt-deps libmcrypt-dev \
-&& pecl bundle -d /usr/src/php/ext mcrypt \
-&& rm /usr/src/php/ext/mcrypt-*.tgz \
-&& docker-php-ext-install mcrypt \
-&& apk del .mcrypt-deps
+RUN apk add --no-cache libmcrypt-dev
+RUN docker-php-ext-install mcrypt
 RUN pecl bundle -d /usr/src/php/ext redis \
 && rm /usr/src/php/ext/redis-*.tgz \
 && docker-php-ext-install redis
-RUN apk add --no-cache --virtual .imagick-deps imagemagick-dev \
-&& pecl bundle -d /usr/src/php/ext imagick \
-&& rm /usr/src/php/ext/imagick-*.tgz \
-&& docker-php-ext-install imagick \
-&& apk del .imagick-deps
+RUN apk add --no-cache ${PHPIZE_DEPS} imagemagick imagemagick-dev
+RUN pecl install -o -f imagick \
+    &&  docker-php-ext-enable imagick
 RUN apk add libsodium-dev
 RUN pecl bundle -d /usr/src/php/ext libsodium \
 && rm /usr/src/php/ext/libsodium-*.tgz \
 && docker-php-ext-install libsodium
-RUN apk add composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENTRYPOINT php-fpm
