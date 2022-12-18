@@ -78,7 +78,7 @@ List of extensions:
 #### Start a PHP-FPM instance
 
 ```bash 
-docker run -d --name my-running-app -v /path/to/app:/var/www/html -p 9000:9000 php-fpm-full
+docker run -d --name my-running-app -v /path/to/app:/var/www/html -p 9000:9000 detallado/php-fpm-full:8.2-alpine
 ```
 
 ### Downloable PHP versions
@@ -90,6 +90,14 @@ docker run -d --name my-running-app -v /path/to/app:/var/www/html -p 9000:9000 p
 * PHP 8.0 `docker pull detallado/php-fpm-full:8.0`
 * PHP 8.1 `docker pull detallado/php-fpm-full:8.1`
 * PHP 8.2 `docker pull detallado/php-fpm-full:8.2`
+* PHP 7.0 `docker pull detallado/php-fpm-full:7.0-alpine`
+* PHP 7.1 `docker pull detallado/php-fpm-full:7.1-alpine`
+* PHP 7.2 `docker pull detallado/php-fpm-full:7.2-alpine`
+* PHP 7.3 `docker pull detallado/php-fpm-full:7.3-alpine`
+* PHP 7.4 `docker pull detallado/php-fpm-full:7.4-alpine`
+* PHP 8.0 `docker pull detallado/php-fpm-full:8.0-alpine`
+* PHP 8.1 `docker pull detallado/php-fpm-full:8.1-alpine`
+* PHP 8.2 `docker pull detallado/php-fpm-full:8.2-alpine`
 * PHP Latest version `docker pull detallado/php-fpm-full:latest` (The latest version always uses the most recent version of PHP)
 
 # To do
