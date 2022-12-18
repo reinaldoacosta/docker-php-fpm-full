@@ -24,7 +24,7 @@ RUN docker-php-ext-install ftp
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install gettext
 RUN docker-php-ext-install gmp
-RUN docker-php-ext-install iconv
+RUN docker-php-ext-configure iconv --with-iconv
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install json
 RUN docker-php-ext-install ldap
@@ -41,7 +41,6 @@ RUN docker-php-ext-install pgsql
 RUN docker-php-ext-install phar
 RUN docker-php-ext-install posix
 RUN docker-php-ext-install pspell
-RUN docker-php-ext-install readline
 RUN docker-php-ext-install session
 RUN docker-php-ext-install shmop
 RUN docker-php-ext-install simplexml
@@ -59,6 +58,28 @@ RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zend_test
 RUN docker-php-ext-install zip
+
+#install redis extension
+RUN pecl bundle -d /usr/src/php/ext redis \
+&& rm /usr/src/php/ext/redis-*.tgz \
+&& docker-php-ext-install redis
+
+RUN set -ex \
+    && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
+    && export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
+    && pecl install imagick-3.4.3 \
+    && docker-php-ext-enable imagick \
+    && apk add --no-cache --virtual .imagick-runtime-deps imagemagick \
+    && apk del .phpize-deps
+
+#install libsodium extension
+RUN pecl bundle -d /usr/src/php/ext libsodium \
+&& rm /usr/src/php/ext/libsodium-*.tgz \
+&& docker-php-ext-install libsodium
+
+RUN apk add --no-cache --virtual .persistent-deps libffi-dev \
+    && docker-php-ext-configure ffi --with-ffi \
+    && docker-php-ext-install ffi
 
 RUN apk add composer
 

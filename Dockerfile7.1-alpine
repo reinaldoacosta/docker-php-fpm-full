@@ -62,4 +62,31 @@ RUN docker-php-ext-install zip
 
 RUN apk add composer
 
+#install mcrypt extension
+RUN apk add --no-cache --virtual .mcrypt-deps libmcrypt-dev \
+&& pecl bundle -d /usr/src/php/ext mcrypt \
+&& rm /usr/src/php/ext/mcrypt-*.tgz \
+&& docker-php-ext-install mcrypt \
+&& apk del .mcrypt-deps
+
+#install redis extension
+RUN pecl bundle -d /usr/src/php/ext redis \
+&& rm /usr/src/php/ext/redis-*.tgz \
+&& docker-php-ext-install redis
+
+#install imagick extension
+RUN apk add --no-cache --virtual .imagick-deps imagemagick-dev \
+&& pecl bundle -d /usr/src/php/ext imagick \
+&& rm /usr/src/php/ext/imagick-*.tgz \
+&& docker-php-ext-install imagick \
+&& apk del .imagick-deps
+
+RUN apk add libsodium-dev
+#install libsodium extension
+RUN pecl bundle -d /usr/src/php/ext libsodium \
+&& rm /usr/src/php/ext/libsodium-*.tgz \
+&& docker-php-ext-install libsodium
+
+RUN apk add composer
+
 ENTRYPOINT php-fpm
