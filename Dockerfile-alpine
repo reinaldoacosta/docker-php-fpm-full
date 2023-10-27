@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.0-fpm-alpine
 RUN apk update
 RUN apk add postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
     libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev \
