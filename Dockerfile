@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 RUN apt update
 RUN apt install -y libpq-dev
 RUN apt install -y libonig-dev
@@ -81,6 +81,8 @@ RUN pecl install redis
 RUN docker-php-ext-enable redis
 RUN pecl install imagick
 RUN docker-php-ext-enable imagick
+RUN apt install -y libffi-dev && docker-php-ext-install ffi
+RUN echo "INSTALLING COMPOSER"
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /usr/local/bin/composer
 ENTRYPOINT php-fpm

@@ -1,4 +1,4 @@
-FROM php:7.0-fpm
+FROM php:8.3-fpm
 RUN apt update
 RUN apt install -y libpq-dev
 RUN apt install -y libonig-dev
@@ -17,7 +17,6 @@ RUN apt install -y freetds-dev
 RUN apt install -y libbz2-dev
 RUN apt install -y libpspell-dev
 RUN apt install -y libldap2-dev
-RUN apt install -y libenchant-dev
 RUN apt install -y libc-client-dev
 RUN apt install -y libkrb5-dev
 RUN apt install -y libldap2-dev
@@ -37,23 +36,18 @@ RUN docker-php-ext-install ctype
 RUN docker-php-ext-install curl
 RUN docker-php-ext-install dba
 RUN docker-php-ext-install dom
-RUN docker-php-ext-install enchant
 RUN docker-php-ext-install exif
+RUN docker-php-ext-install ffi
 RUN docker-php-ext-install fileinfo
 RUN docker-php-ext-install ftp
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install gettext
 RUN docker-php-ext-install gmp
-RUN docker-php-ext-install hash
 RUN docker-php-ext-install iconv
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 RUN docker-php-ext-install imap
-RUN docker-php-ext-install interbase
 RUN docker-php-ext-install intl
-RUN docker-php-ext-install json
 RUN docker-php-ext-install ldap
-RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install mcrypt
 RUN docker-php-ext-install mysqli
 RUN docker-php-ext-install opcache
 RUN docker-php-ext-install pcntl
@@ -69,8 +63,6 @@ RUN docker-php-ext-install pgsql
 RUN docker-php-ext-install phar
 RUN docker-php-ext-install posix
 RUN docker-php-ext-install pspell
-RUN docker-php-ext-install readline
-RUN docker-php-ext-install recode
 RUN docker-php-ext-install session
 RUN docker-php-ext-install shmop
 RUN docker-php-ext-install simplexml
@@ -80,11 +72,8 @@ RUN docker-php-ext-install sysvmsg
 RUN docker-php-ext-install sysvsem
 RUN docker-php-ext-install sysvshm
 RUN docker-php-ext-install tidy
-RUN docker-php-ext-install tokenizer
-RUN docker-php-ext-install wddx
 RUN docker-php-ext-install xml
 RUN export CFLAGS="-I/usr/src/php" && docker-php-ext-install xmlreader
-RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xmlwriter
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
@@ -92,9 +81,7 @@ RUN pecl install redis
 RUN docker-php-ext-enable redis
 RUN pecl install imagick
 RUN docker-php-ext-enable imagick
-RUN apt-get install -y libsodium-dev
-RUN pecl install libsodium
-RUN docker-php-ext-enable sodium
+RUN apt install -y libffi-dev && docker-php-ext-install ffi
 RUN echo "INSTALLING COMPOSER"
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /usr/local/bin/composer
