@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.4-fpm-alpine
 RUN apk update
 RUN apk add postgresql-dev oniguruma-dev curl-dev libxml2-dev bzip2-dev libedit-dev zlib-dev \
     libpng-dev icu-dev gettext-dev gmp-dev sqlite-dev openssl-dev \
@@ -30,9 +30,7 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install pdo_pgsql
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install pgsql
-RUN docker-php-ext-install phar
 RUN docker-php-ext-install posix
-RUN docker-php-ext-install pspell
 RUN docker-php-ext-install session
 RUN docker-php-ext-install shmop
 RUN docker-php-ext-install simplexml
@@ -61,10 +59,17 @@ RUN apk add libsodium-dev
 RUN pecl bundle -d /usr/src/php/ext libsodium \
   && rm /usr/src/php/ext/libsodium-*.tgz \
   && docker-php-ext-install libsodium
+RUN apk add aspell-dev enchant2-dev
+# Install system dependencies
+RUN apk add --no-cache \
+    aspell-dev \
+    aspell-en # Optional: adds English dictionary support
+
+# Configure and install the extension
+RUN pecl install pspell
 RUN apk add --no-cache --virtual .persistent-deps libffi-dev \
     && docker-php-ext-configure ffi --with-ffi \
     && docker-php-ext-install ffi
-RUN echo "INSTALLING COMPOSER"
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && php -r "unlink('composer-setup.php');" && mv composer.phar /usr/local/bin/composer
 ENTRYPOINT php-fpm

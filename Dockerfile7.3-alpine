@@ -51,9 +51,6 @@ RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zend_test
 RUN docker-php-ext-install zip
-RUN pecl bundle -d /usr/src/php/ext redis \
-&& rm /usr/src/php/ext/redis-*.tgz \
-&& docker-php-ext-install redis
 RUN apk add --no-cache --virtual .imagick-deps imagemagick-dev \
 && pecl bundle -d /usr/src/php/ext imagick \
 && rm /usr/src/php/ext/imagick-*.tgz \

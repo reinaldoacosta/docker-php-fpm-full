@@ -51,9 +51,9 @@ RUN docker-php-ext-install xmlrpc
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zend_test
 RUN docker-php-ext-install zip
-RUN pecl bundle -d /usr/src/php/ext redis \
-&& rm /usr/src/php/ext/redis-*.tgz \
-&& docker-php-ext-install redis
+RUN	pecl install imagick-3.7.0 redis apcu; \
+	docker-php-ext-enable imagick redis apcu; \
+	rm -r /tmp/pear;
 RUN set -ex \
     && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS imagemagick-dev libtool \
     && export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \

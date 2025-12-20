@@ -58,9 +58,6 @@ RUN apk add --no-cache --virtual .mcrypt-deps libmcrypt-dev \
 && rm /usr/src/php/ext/mcrypt-*.tgz \
 && docker-php-ext-install mcrypt \
 && apk del .mcrypt-deps
-RUN pecl bundle -d /usr/src/php/ext redis \
-&& rm /usr/src/php/ext/redis-*.tgz \
-&& docker-php-ext-install redis
 RUN apk add --no-cache --virtual .imagick-deps imagemagick-dev \
 && pecl bundle -d /usr/src/php/ext imagick \
 && rm /usr/src/php/ext/imagick-*.tgz \

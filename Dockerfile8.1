@@ -17,7 +17,7 @@ RUN apt install -y freetds-dev
 RUN apt install -y libbz2-dev
 RUN apt install -y libpspell-dev
 RUN apt install -y libldap2-dev
-RUN apt install -y libc-client-dev
+RUN apt install -y libc6-dev
 RUN apt install -y libkrb5-dev
 RUN apt install -y libldap2-dev
 RUN apt install -y libmcrypt-dev
@@ -44,8 +44,6 @@ RUN docker-php-ext-install gd
 RUN docker-php-ext-install gettext
 RUN docker-php-ext-install gmp
 RUN docker-php-ext-install iconv
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
-RUN docker-php-ext-install imap
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install ldap
 RUN docker-php-ext-install mysqli

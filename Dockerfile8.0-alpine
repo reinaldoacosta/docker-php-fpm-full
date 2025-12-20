@@ -52,9 +52,9 @@ RUN apk add --no-cache --virtual .xmlrpc-deps libxml2-dev \
   && rm /usr/src/php/ext/xmlrpc-*.tgz \
   && docker-php-ext-install xmlrpc \
   && apk del .xmlrpc-deps
-RUN pecl bundle -d /usr/src/php/ext redis \
-  && rm /usr/src/php/ext/redis-*.tgz \
-  && docker-php-ext-install redis
+RUN	pecl install imagick-3.7.0 redis apcu; \
+	docker-php-ext-enable imagick redis apcu; \
+	rm -r /tmp/pear;
 RUN apk add --no-cache ${PHPIZE_DEPS} imagemagick imagemagick-dev
 RUN pecl install -o -f imagick \
     &&  docker-php-ext-enable imagick
